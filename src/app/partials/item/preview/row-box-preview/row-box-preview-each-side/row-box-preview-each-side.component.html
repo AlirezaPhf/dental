@@ -1,0 +1,50 @@
+<div class="flex h-100">
+  <ng-container *ngFor="let item of cariesData">
+    <ng-container *ngIf="
+      position === 1 && (item.positionType === 20001 || item.positionType === 20003)
+      ||
+      position === 2 && (item.positionType === 20002 || item.positionType === 20004)
+      ">
+      <div class="item flex f-column" *ngIf="(type === 'caries' && item.caries && item.caries.length > 0) || (type === 'retained' && item.retainedRoot)
+        || (type === 'lesion' && item.pulpLesion) || (type === 'boneLoss' && item.boneLoss)">
+
+        <div class="f-grow-1 flex f-vertical-bottom"
+          [class.f-horizontal-bottom]="item.positionType === 20001 || item.positionType === 20003">
+          <!-- <span class="seprator">,</span> -->
+          <div *ngIf="type === 'caries'" class="cariesTypes flex">
+            <div class="cariesItem flex f-column" *ngFor="let cariesItem of item.caries; let cariesIndex = index"
+              [ngClass]="cariesIndex !== (item.caries.length - 1) ? 'mr-5 ml-5' : ''">
+
+              <div *ngIf="cariesItem.cariesInfos && cariesItem.cariesInfos.length > 0"
+                class="cariesInfoTypes flex f-grow-1">
+                <span *ngFor="let itemCariesInfo of cariesItem.cariesInfos">
+                  {{itemCariesInfo.type === 40001 ? 'مینایی' : itemCariesInfo.type === 40002 ? '؟' :  itemCariesInfo.type === 40003 ? 'عود' :  itemCariesInfo.type === 40004 ? 'gap' : itemCariesInfo.description}}
+                </span>
+              </div>
+
+              {{cariesItem.type === 30001 ? 'M' : cariesItem.type === 30002 ? 'D' :  cariesItem.type === 30003 ? 'OC' : cariesItem.description}}
+            </div>
+          </div>
+          <!-- --- -->
+          <div *ngIf="type === 'retained'" class="retainedRoot">
+            {{item.retainedRoot.type === 50001 ? '?' : item.retainedRoot.description}}
+          </div>
+          <!-- --- -->
+          <div *ngIf="type === 'lesion'" class="pulpLesion">
+            {{item.pulpLesion.type === 60001 ? '?' : item.pulpLesion.type === 60002 ? 'PDL Widening' : item.pulpLesion.type === 60003 ? 'PDL Widening ?' 
+          : item.pulpLesion.type === 60004 ? 'درگیری فورکا' : item.pulpLesion.description}}
+          </div>
+          <!-- --- -->
+          <div *ngIf="type === 'boneLoss' && item.boneLoss && item.boneLoss.length > 0" class="boneLoss">
+            <div class="boneLosstypes">{{item.boneLoss[0].type === 70001 ? 'M' : 'D'}}</div>
+          </div>
+        </div>
+        <!-- --- -->
+        <span class="toothNumber" *ngIf="!item.forChildren">{{item.toothNumber}}</span>
+        <span class="toothNumber" *ngIf="item.forChildren">
+          {{item.toothNumber === 1 ? 'A' : item.toothNumber === 2 ? 'B' : item.toothNumber === 3 ? 'C' : item.toothNumber === 4 ? 'D' : 'E'}}
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

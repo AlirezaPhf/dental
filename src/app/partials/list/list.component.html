@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="topForm mt-25 row" [formGroup]="form" *ngIf="filterData">
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>نوع گزارش</mat-label>
+        <mat-select formControlName="reportType">
+          <mat-option *ngFor="let item of filterData.reportTypes" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>نام گزارش‌دهنده</mat-label>
+        <mat-select formControlName="reporterId">
+          <mat-option *ngFor="let item of filterData.reporter" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>نام بیمار</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>نام دکتر</mat-label>
+        <input matInput formControlName="drName">
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>تاریخ گزارش از</mat-label>
+        <input matInput formControlName="fromReportDate" [matDatepicker]="fromReport">
+        <mat-datepicker-toggle matSuffix [for]="fromReport"></mat-datepicker-toggle>
+        <mat-datepicker #fromReport></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>تا</mat-label>
+        <input matInput [min]="form.get('fromReportDate')?.value" formControlName="toReportDate"
+          [matDatepicker]="toReport">
+        <mat-datepicker-toggle matSuffix [for]="toReport"></mat-datepicker-toggle>
+        <mat-datepicker #toReport></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>تاریخ تنظیم از</mat-label>
+        <input matInput formControlName="fromAddDate" [matDatepicker]="fromAdd">
+        <mat-datepicker-toggle matSuffix [for]="fromAdd"></mat-datepicker-toggle>
+        <mat-datepicker #fromAdd></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- --- -->
+    <div class="col-2">
+      <mat-form-field appearance="outline">
+        <mat-label>تا</mat-label>
+        <input matInput [min]="form.get('fromAddDate')?.value" formControlName="toAddDate" [matDatepicker]="toAdd">
+        <mat-datepicker-toggle matSuffix [for]="toAdd"></mat-datepicker-toggle>
+        <mat-datepicker #toAdd></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- --- -->
+  <div class="bottomForm row">
+    <div class="col">
+      <button mat-flat-button class="w-100">ایجاد گزارش</button>
+    </div>
+    <!-- --- -->
+    <div class="col">
+      <button mat-flat-button color="primary" [disabled]="form.invalid" class="w-100" (click)="getData()">جستجو</button>
+    </div>
+  </div>
+
+
+  <!-- -------- -->
+
+  <div *ngIf="reportData && reportData.data && reportData.data.length > 0" class="mt-45">
+    <dental-custom-table [config]="requestTableConfig" [data]="reportData.data" [hasRemove]="false" [hasEdit]="true"
+      [itemsPerPage]="pageSize" [count]="reportData.count" [hasSelect]="false" (pageChanged)="onPageChange($event)"
+      (actionClicked)="onClickAction($event)">
+    </dental-custom-table>
+  </div>
+
+</div>

@@ -1,0 +1,289 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+
+@import '~ngx-toastr/toastr';
+@import './app/theme/scss/basic';
+@import './app/theme/scss/font';
+@import './app/theme/scss/grid';
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.resetInput {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+
+.tableRow {
+  .box {
+    .item {
+      font-size: 13px;
+      min-width: 75px;
+      position: relative;
+
+      .cariesItem {
+        position: relative;
+
+        .cariesInfoTypes {
+          transform: rotate(-90deg);
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: calc(-100% - 10px);
+          flex-direction: row-reverse;
+        }
+      }
+
+
+
+      span.toothNumber {
+        font-size: 21px;
+        font-weight: bold;
+      }
+
+
+      .seprator {
+        margin: 0 6px;
+      }
+    }
+
+    .top,
+    .bottom {
+      min-height: 40px;
+    }
+
+    .top {
+      border-bottom: 1px solid #DDD;
+    }
+
+    .horizontalSeprator {
+      background: #DDD;
+      width: 1px;
+    }
+
+    .right {
+
+      .item {
+        text-align: left;
+      }
+    }
+
+
+    .right,
+    .left {
+      padding: 10px;
+    }
+
+  }
+}
+
+.mat-flat-button {
+  height: 48px;
+}
+
+
+.horizontalCenter .ngx-pagination {
+  justify-content: center;
+}
+
+.ngx-pagination {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  flex-wrap: wrap;
+
+  .small-screen {
+    display: none;
+  }
+
+  li {
+    transition: all .3s;
+    background: transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    a {
+      color: #929292 !important;
+    }
+
+    .show-for-sr {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    &:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50% !important;
+      width: 35px;
+      height: 35px;
+      padding: 0 !important;
+      margin: 0 5px;
+      border: 1px solid transparent;
+    }
+
+    &:not(.small-screen):not(.pagination-previous):not(.pagination-next):not(.current) {
+      border-color: #dcdcdc;
+    }
+
+  }
+}

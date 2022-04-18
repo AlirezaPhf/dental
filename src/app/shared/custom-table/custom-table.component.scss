@@ -1,0 +1,85 @@
+$order-color: #1bc5bd;
+$br-r-50: 50px !important;
+
+.mat-header-cell {
+  color: #808ca4 !important;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  opacity: 1;
+  vertical-align: middle;
+}
+
+.mat-cell {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #000000;
+  opacity: 1;
+  vertical-align: middle;
+
+}
+
+.on-visible {
+  background: hsla(0, 0%, 80%, .23) 0 0 no-repeat padding-box;
+  color: #808CA4 !important;
+  font-weight: 300;
+  text-align: right;
+  font: normal normal normal 12px/19px IRANSansFaNum;
+  letter-spacing: 0px;
+}
+
+.customTable th.mat-header-cell,
+.customTable td.mat-cell {
+  border-bottom-color: #DCE1E6;
+}
+
+.no-wrap {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  max-width: 150px !important;
+  display: flex !important;
+}
+
+th.mat-header-cell {
+  border-top: 0 !important;
+}
+
+.starSucess {
+  color: $order-color;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.imgWrapper {
+  border-radius: $br-r-50;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #DCE1E6;
+  opacity: 1;
+}
+
+::ng-deep .tooltip {
+  white-space: nowrap;
+}
+
+.actions button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background-color: #f3f6f9;
+  transition: all .3s;
+
+  span {
+    &.material-icons {
+      font-size: 21px;
+      color: #b5b5c3;
+    }
+  }
+
+}

@@ -1,0 +1,40 @@
+<div class="rowReport flex">
+  <div class="rightSide flex f-grow-1 f-horizontal-bottom">
+    <div *ngFor="let item of rightSideData" class="boxItem" [class.hasItems]="(item.boneLoss && item.boneLoss.length > 0) || (item.calculus && item.calculus.length > 0)
+    || (item.caries && item.caries.length > 0) || (item.impactedTeeth && item.impactedTeeth.type && item.impactedTeeth.type !== -1) || 
+    item.pulpLesion || item.retainedRoot"
+      [class.active]="(mainService.showToothDetails | async)?.toothType === item.toothType" (click)="showDetails(item)">
+      <ng-container *ngIf="type === 1;else adult">
+        <span *ngIf="item.toothNumber === 1">A</span>
+        <span *ngIf="item.toothNumber === 2">B</span>
+        <span *ngIf="item.toothNumber === 3">C</span>
+        <span *ngIf="item.toothNumber === 4">D</span>
+        <span *ngIf="item.toothNumber === 5">E</span>
+      </ng-container>
+      <!-- --- -->
+      <ng-template #adult>
+        {{item.toothNumber}}
+      </ng-template>
+    </div>
+  </div>
+  <!-- --- -->
+  <div class="leftSide flex f-grow-1">
+    <div *ngFor="let item of leftSideData" class="boxItem"
+      [class.hasItems]="(item.boneLoss && item.boneLoss.length > 0) || (item.calculus && item.calculus.length > 0)
+    || (item.caries && item.caries.length > 0) || (item.impactedTeeth && item.impactedTeeth.type && item.impactedTeeth.type !== -1) || 
+    (item.pulpLesion && item.pulpLesion.type && item.pulpLesion.type !== -1) || (item.retainedRoot && item.retainedRoot.type && item.retainedRoot.type !== -1)"
+      [class.active]="(mainService.showToothDetails | async)?.toothType === item.toothType" (click)="showDetails(item)">
+      <ng-container *ngIf="type === 1;else adult">
+        <span *ngIf="item.toothNumber === 1">A</span>
+        <span *ngIf="item.toothNumber === 2">B</span>
+        <span *ngIf="item.toothNumber === 3">C</span>
+        <span *ngIf="item.toothNumber === 4">D</span>
+        <span *ngIf="item.toothNumber === 5">E</span>
+      </ng-container>
+      <!-- --- -->
+      <ng-template #adult>
+        {{item.toothNumber}}
+      </ng-template>
+    </div>
+  </div>
+</div>

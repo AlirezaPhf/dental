@@ -1,0 +1,149 @@
+<ng-container *ngIf="data && data.length > 0">
+  <div class="w-100" style="overflow: auto;">
+    <table class="w-100 customTable" mat-table
+      [dataSource]="data | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: count }" matSort>
+      <ng-container *ngIf="showCounter" matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+        <td mat-cell *matCellDef="let element;let i=index" [ngClass]="{'on-visible' : (data[i].hotelAnswer != null  && data[i].hotelAnswer != '')|| data[i].seen === true && data[i].status != 1 || data[i].seen === false
+          && data[i].status === 2 || hasPanelAdmin === true && data[i].status != 1 }">
+          {{(page - 1) * (itemsPerPage ? itemsPerPage : 0) + i + 1}}
+        </td>
+      </ng-container>
+      <ng-container *ngFor="let col of config" [matColumnDef]="col.key">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [width]="col.colWidth ? col.colWidth + 'px' : ''">
+          {{col.title}}
+        </th>
+        <td mat-cell *matCellDef="let element;let k = index" [width]="col.colWidth ? col.colWidth + 'px' : ''"
+          [ngClass]="{'on-visible' :(data[k].hotelAnswer != null && data[k].hotelAnswer != '') || data[k].seen === true && data[k].status != 1
+            || data[k].seen === false  && data[k].status === 2  || hasPanelAdmin === true && data[k].status != 1 }">
+          <div [class]="col.class">
+            <!-- if type is image ? give image name in assets/images -->
+            <div class="imgWrapper mw-100 mt-10 mb-10" *ngIf="col.type === 'image'" [style.width]="col.colWidth + 'px'"
+              [style.height]="col.colWidth + 'px'">
+              <img #img [style.width]="col.colWidth + 'px'" (error)="img.src = default"
+                [src]="col.content ? '../../../../assets/images/' : '' + detectTitle(element, col)">
+            </div>
+            <div class="mt-15" *ngIf="col.type === 'rate' && col.key === 'guestName'">
+              <span class="fz-1 c-black-3 fw-400">{{element[col.key]}}</span>
+              <div class="mw-100 mb-10 flex" *ngIf="col.type === 'rate'" [style.width]="col.colWidth + 'px'"
+                [style.height]="col.colWidth + 'px'">
+                <div *ngFor="let item of repeat(data[k].rate)">
+                  <span class="material-icons c-warning fz-1-1">star</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- condition for showing data  -->
+            <span [class]="col.contentClass ? col.contentClass : '' "
+              *ngIf="col.content && !col.type && !isArray(element[col.key])">{{detectTitle(element, col)}}</span>
+            <span class="label"
+              *ngIf="isBoolean(element[col.key]) && !col.type && !col.content && displayOrder ===false" [class]="
+              !col.booleanType && element[col.key] ? 'success'
+              :
+              !col.booleanType && !element[col.key] ? 'warn' : ''">
+              <span *ngIf="col.booleanType === 'haveOrNot'" class="material-icons"
+                [class]="element[col.key] ? 'c-success' : 'c-dark-blue'">
+                {{
+                  element[col.key] ? 'done' : '-'
+                }}
+              </span>
+              <ng-container *ngIf="!col.booleanType">
+                {{
+                  element[col.key] ? 'فعال' : 'غیرفعال'
+                }}
+              </ng-container>
+
+            </span>
+            <span class="label" *ngIf="isOrder(element[col.key]) && !col.type"
+              [class]="element[col.key] ? 'success' : 'success'">
+              {{element[col.key]}}
+            </span>
+            <span *ngIf="isBoolean(element[col.key]) && displayOrder ===true"
+              class="material-icons bg-Transparent starSucess fz-1-2">{{element[col.key] ? 'star' : ''}}</span>
+            <span class="label" *ngIf="viewOrder(element[col.key])   && !col.type" class="bg-{{element.statusType}}">
+              {{viewOrder(element[col.key])}}
+            </span>
+            <!-- ---------------- -->
+
+
+            <!--
+            اگر فیلد دیتای ورودی به صورت
+            ---- array ----
+            باشد، به صورت حلقه در جدول نمایش داده میشود
+            -->
+            <ul *ngIf="isArray(element[col.key])">
+              <li *ngFor="let item of element[col.key]">
+                <ng-container *ngIf="col.content && item[col.content]">
+                  {{item.nameFa || item.name || item.title}}
+                </ng-container>
+              </li>
+            </ul>
+            <!-- ---------------- -->
+            <!-- فقط نمایش عنوان -->
+            <span class="block" [matTooltip]="element[col.key] ? element[col.key] : '-'" matTooltipClass="tooltip"
+              matTooltipPosition="below"
+              *ngIf="!isBoolean(element[col.key])&& !isArray(element[col.key]) && !col.content && !viewOrder(element[col.key]) && !isOrder(element[col.key]) && !col.type">
+              {{element[col.key] ? element[col.key] : '-'}}
+            </span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element;let j=index"
+          [ngClass]="{'on-visible' : (data[j].hotelAnswer != null  && data[j].hotelAnswer != '')|| data[j].seen === true && data[j].status != 1 || data[j].seen === false  && data[j].status === 2  || hasPanelAdmin === true && data[j].status != 1 }">
+          <div class="actions text-left">
+            <!-- add user role -->
+            <button *ngIf="addUserRole" (click)="onClickAction('userRole', element.id || element.userId, element)"
+              mat-icon-button matTooltip="اختصاص دسترسي كاربر" class="badgeOrderSort ml-10">
+              <span class="material-icons">person_add_alt_1</span>
+            </button>
+            <!-- select -->
+            <button *ngIf="hasSelect" (click)="onClickAction('select', element.id || element.userId, element)"
+              mat-icon-button class="badgeOrderSort ml-10">
+              <span class="material-icons">check</span>
+            </button>
+            <!-- edit -->
+            <button mat-icon-button *ngIf="hasEdit"
+              (click)="onClickAction('edit', element.id || element.userId || element.reserveId, element)"
+              class="badgeOrderSort ml-10">
+              <span class="material-icons">create</span>
+            </button>
+            <!-- remove -->
+            <button *ngIf="hasRemove" (click)="onClickAction('remove', element.id || element.userId, element)"
+              mat-icon-button class="badgeOrderSort ml-10">
+              <span class="material-icons">delete</span>
+            </button>
+            <!-- request list -->
+            <div class="row" *ngIf="hasSeen">
+              <div (click)="onClickDataId(element.id,'view-list')" class="bg-icon mr-10 ml-10">
+                <span class="icon-view-list fz-1-3 c-pointer" matTooltip="جزئيات اطلاعات"><span
+                    class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+              </div>
+              <!--<span class="icon-view-list fz-1-1 mr-10 ml-10 c-pointer" matTooltip="جزئيات اطلاعات"-->
+              <!--(click)="openDialog(element.id)"></span>-->
+              <span *ngIf="data[j].seen === false && data[j].status != 1 && data[j].status != 2"
+                class="icon-eye fz-1 c-pointer bg-icon" matTooltip="مشاهده كردم"
+                (click)="onClickDataId(element.id,'eye')"></span>
+            </div>
+            <!-- dynamic actions -->
+            <ng-container *ngIf="dynamicAction && dynamicAction.length > 0">
+              <ng-container *ngFor="let item of dynamicAction">
+                <button *ngIf="item.condition ? element[item.condition[0]] === item.condition[1] : true" mat-icon-button
+                  class="badgeOrderSort ml-10" (click)="onClickAction(item.actionName, element.id, element)"
+                  matTooltip="{{item.tooltip}}">
+                </button>
+              </ng-container>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" [ngClass]="{'h-0' : !showTitle}"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</ng-container>
+<div class="mt-25 horizontalCenter" *ngIf="count > itemsPerPage">
+  <pagination-controls previousLabel="قبلی" nextLabel="بعدی" (pageChange)="changePage($event)" [maxSize]="5">
+  </pagination-controls>
+</div>

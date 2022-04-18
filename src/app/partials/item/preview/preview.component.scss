@@ -1,0 +1,51 @@
+.preview {
+  height: 100vh;
+  border-left: 1px solid #DDD;
+  position: relative;
+
+  .topSide {
+    border-bottom: 1px solid #DDD;
+    padding: 15px 0;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 15px;
+        border: 1px solid #DDD;
+        padding: 0 10px;
+        border-radius: 6px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .details {
+    padding-left: 20px;
+
+    .patient {
+      display: flex;
+      margin: 15px 0 30px;
+
+      h3 {
+        margin-bottom: 15px;
+      }
+    }
+
+
+  }
+}

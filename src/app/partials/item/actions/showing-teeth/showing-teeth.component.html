@@ -1,0 +1,25 @@
+<div *ngIf="(appData$ | async) as _appData" class="actionsWrapper">
+  <div class="topRow">
+    <!-- top children -->
+    <dental-row-report *ngIf="_appData.children.top.length > 0" [type]="1" position="top"
+      [reportData]="_appData.children.top">
+    </dental-row-report>
+    <!-- top adult -->
+    <dental-row-report *ngIf="_appData.adult.top.length > 0" [type]="2" position="top"
+      [reportData]="_appData.adult.top">
+    </dental-row-report>
+  </div>
+  <!-- --- -->
+  <div class="BottomRow">
+
+    <!-- bottom adult -->
+    <dental-row-report *ngIf="_appData.adult.bottom.length > 0" [type]="2" position="bottom"
+      [reportData]="_appData.adult.bottom">
+    </dental-row-report>
+
+    <!-- bottom children -->
+    <dental-row-report *ngIf="_appData.children.bottom.length > 0" [type]="1" position="bottom"
+      [reportData]="_appData.children.bottom">
+    </dental-row-report>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="toothDetails" *ngIf="toothDetails">
+
+  <!-- Carries -->
+  <div class="rowDetail flex f-vertical-center">
+    <div class="rightSide f-grow-1 f-column">
+      <div class="innerRow flex f-row-reverse f-space-between f-vertical-center"
+        *ngFor="let type of cariesTypes; let index = index">
+        <ng-container *ngIf="type.id !== 30004">
+          <button mat-flat-button [color]="isActiveCaries(type.id) ? 'primary' : 'default'"
+            (click)="onCariesAction(type)">{{type.name}}</button>
+          <!-- --- -->
+          <div class="innerCol" *ngFor="let infoType of cariesInfoTypes">
+            <button *ngIf="infoType.id !== 40005" mat-flat-button
+              [color]="isActiveCariesInfo(infoType.id, type.id) ? 'primary' : 'default'"
+              (click)="onCariesInfoAction(infoType, type)">{{infoType.name}}</button>
+            <input *ngIf="infoType.id === 40005" placeholder="----------" class="resetInput text-left">
+          </div>
+        </ng-container>
+        <!-- --- -->
+        <ng-container *ngIf="type.id === 30004">
+          <input placeholder="----------" class="resetInput text-left">
+        </ng-container>
+      </div>
+    </div>
+    <!-- --- -->
+    <div class="leftSide">
+      <span>Caries</span>
+    </div>
+  </div>
+
+
+
+  <!-- retained Root -->
+  <div class="rowDetail flex f-vertical-center">
+    <div class="rightSide f-grow-1 f-column">
+      <div class="innerRow flex f-row-reverse f-space-between f-vertical-center">
+        <div class="innerCol" *ngFor="let retainedRoot of retainedRootTypes">
+          <button *ngIf="retainedRoot.id !== 50002" mat-flat-button
+            [color]="toothDetails.retainedRoot && toothDetails.retainedRoot.type === retainedRoot.id ? 'primary' : 'default' "
+            (click)="onRetainedRootAction(retainedRoot)">{{retainedRoot.name}}</button>
+          <input *ngIf="toothDetails.retainedRoot && retainedRoot.id === 50002"
+            [(ngModel)]="toothDetails.retainedRoot.description" placeholder="----------" class="resetInput text-left">
+        </div>
+      </div>
+    </div>
+    <!-- --- -->
+    <div class="leftSide">
+      <span>Retained Root</span>
+    </div>
+  </div>
+
+
+
+
+  <!-- pulp Lesion Types -->
+  <div class="rowDetail flex f-vertical-center">
+    <div class="rightSide f-grow-1 f-column">
+      <div class="innerRow flex f-row-reverse f-space-between f-vertical-center">
+        <div class="innerCol" *ngFor="let pulpLesion of pulpLesionTypes">
+          <button *ngIf="pulpLesion.id !== 60005" mat-flat-button
+            [color]="toothDetails.pulpLesion && toothDetails.pulpLesion.type === pulpLesion.id ? 'primary' : 'default' "
+            (click)="onPulpLesionAction(pulpLesion)">{{pulpLesion.name}}</button>
+          <input *ngIf="toothDetails.pulpLesion && pulpLesion.id === 60005"
+            [(ngModel)]="toothDetails.pulpLesion.description" placeholder="----------" class="resetInput text-left">
+        </div>
+      </div>
+    </div>
+    <!-- --- -->
+    <div class="leftSide">
+      <span>Pulp Lesion</span>
+    </div>
+  </div>
+
+
+
+  <!-- Bone loss -->
+  <div class="rowDetail flex f-vertical-center">
+    <div class="rightSide f-grow-1 f-column">
+      <div class="innerRow flex f-row-reverse f-space-between">
+        <div class="flex f-horizontal-bottom f-grow-1">
+
+          <div class="checkBoxWrapper">
+            <div class="innerBox flex-grow-1">
+              <div *ngFor="let item of [].constructor(boneLossInfoTypes.length - 1); let index = index">
+                <mat-checkbox [checked]="isCheckedBoneLoseInfo(index + 1)"
+                  [disabled]="!toothDetails.boneLoss || !toothDetails.boneLoss[0].type || toothDetails.boneLoss[0].type === -1"
+                  (change)="changeBoneLose($event.checked, index + 1)"></mat-checkbox>
+              </div>
+            </div>
+            <!-- --- -->
+            <mat-checkbox [checked]="isCheckedBoneLoseInfo(5)" (change)="changeBoneLose($event.checked, 5)"
+              [disabled]="!toothDetails.boneLoss || !toothDetails.boneLoss[0].type || toothDetails.boneLoss[0].type === -1">
+            </mat-checkbox>
+          </div>
+          <!-- --- -->
+          <div class="flex f-column buttonsWrapper">
+            <button *ngFor="let type of boneLossTypes" mat-flat-button
+              [color]="toothDetails.boneLoss && type.id === toothDetails.boneLoss[0].type ? 'primary' : 'default'"
+              (click)="onBoneLossAction(type)">{{type.name}}</button>
+          </div>
+
+        </div>
+        <!-- --- -->
+        <div class="divider"></div>
+        <!-- --- -->
+        <div class="f-grow-1 flex f-vertical-center">
+          <div class="checkBoxWrapper">
+            <div class="innerBox flex-grow-1">
+              <div *ngFor="let item of [].constructor(calculusTypes.length - 1); let index = index">
+                <mat-checkbox [checked]="isCheckedCalculus(index + 1)"
+                  (change)="changeCalculus($event.checked, index + 1)"></mat-checkbox>
+              </div>
+            </div>
+            <!-- --- -->
+            <mat-checkbox></mat-checkbox>
+          </div>
+          <!-- --- -->
+          <span>Calculus</span>
+        </div>
+      </div>
+    </div>
+    <!-- --- -->
+    <div class="leftSide">
+      <span>Bone Loss</span>
+    </div>
+  </div>
+
+
+
+  <!-- Last Row-->
+  <div class="rowDetail flex">
+    <div class="rightNoBorder flex f-vertical-center f-grow-1">
+      <div class="f-grow-1">
+        <button (click)="onImpactedAction()"
+          [color]="toothDetails.impactedTeeth && toothDetails.impactedTeeth.type === 110001 ? 'primary' : 'default'"
+          mat-flat-button>semi</button>
+      </div>
+      <div class="f-grow-1 text-left">impacted</div>
+    </div>
+    <!-- --- -->
+    <div class="divider"></div>
+    <!-- --- -->
+    <div class="leftNoBorder f-grow-1">
+      <button mat-flat-button (click)="toothDetails.missingTeeth = !toothDetails.missingTeeth"
+        [color]="toothDetails.missingTeeth ? 'primary' : 'default'">missing</button>
+    </div>
+  </div>
+
+  <!-- --- -->
+  <button class="saveChanges" mat-flat-button color="primary" (click)="saveChanges()">ذخیره تغییرات</button>
+
+</div>

@@ -1,0 +1,148 @@
+@mixin vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin vertical-center-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+@mixin vertical-stretch {
+  display: flex;
+  align-items: stretch;
+}
+
+@mixin horizontal-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin horizontal-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@mixin horizontal-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin fully-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin vertical-bottom {
+  display: flex;
+  align-items: flex-end;
+}
+
+@mixin vertical-top {
+  display: flex;
+  align-items: flex-start;
+}
+
+@mixin space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@mixin space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin column-vertical-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin column-direction {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin dialog($width) {
+  ::ng-deep .mat-dialog-content {
+    margin: 0;
+    padding: 0;
+  }
+
+  ::ng-deep .mat-dialog-actions {
+    margin: 0;
+    padding-bottom: 0;
+    justify-content: flex-end;
+  }
+
+  .dialog {
+
+
+    @include xs() {
+      &:not(.mobileScroll) {
+        width: 100% !important;
+      }
+
+
+    }
+
+
+    @if $width=="large" {
+      height: 72vh;
+    }
+
+    @else if $width=="medium" {
+      width: 600px;
+    }
+
+    @else if $width=="small" {
+      max-width: 400px;
+    }
+
+    @else if $width=="auto" {
+      width: auto;
+    }
+
+
+
+
+  }
+
+
+}
+
+@mixin generateCol($count, $gap: 10px) {
+  $calc: calc((100% / #{$count}) - #{$gap * 2});
+  max-width: $calc;
+  flex: $calc;
+
+  margin-left: $gap;
+  margin-right: $gap;
+
+  &>.mat-form-field {
+    width: 100%;
+  }
+}
+
+@mixin backdrop() {
+  &::after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

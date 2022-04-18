@@ -1,0 +1,50 @@
+<div class="tableRow flex">
+  <div class="box flex f-column f-grow-1">
+    <div class="top flex">
+      <div class="right f-horizontal-bottom flex f-grow-1">
+        <dental-row-box-preview-each-side *ngIf="adultData && adultData.top && adultData.top.length > 0" [type]="type"
+          [position]="1" [cariesData]="adultData.top">
+        </dental-row-box-preview-each-side>
+        <dental-row-box-preview-each-side *ngIf="childrenData && childrenData.top && childrenData.top.length > 0"
+          [type]="type" [position]="1" [cariesData]="childrenData.top">
+        </dental-row-box-preview-each-side>
+      </div>
+      <!-- --- -->
+      <div class="horizontalSeprator"></div>
+      <!-- --- -->
+      <div class="left flex f-grow-1">
+        <dental-row-box-preview-each-side *ngIf="adultData && adultData.top && adultData.top.length > 0" [type]="type"
+          [position]="2" [cariesData]="adultData.top">
+        </dental-row-box-preview-each-side>
+        <dental-row-box-preview-each-side *ngIf="childrenData && childrenData.top && childrenData.top.length > 0"
+          [type]="type" [position]="2" [cariesData]="childrenData.top">
+        </dental-row-box-preview-each-side>
+      </div>
+    </div>
+    <div class="bottom flex">
+      <div class="right f-horizontal-bottom flex f-grow-1">
+        <dental-row-box-preview-each-side *ngIf="adultData && adultData.bottom && adultData.bottom.length > 0"
+          [type]="type" [position]="1" [cariesData]="adultData.bottom">
+        </dental-row-box-preview-each-side>
+        <dental-row-box-preview-each-side *ngIf="childrenData && childrenData.bottom && childrenData.bottom.length > 0"
+          [type]="type" [position]="1" [cariesData]="childrenData.bottom">
+        </dental-row-box-preview-each-side>
+      </div>
+      <!-- --- -->
+      <div class="horizontalSeprator"></div>
+      <!-- --- -->
+      <div class="left flex f-grow-1">
+        <dental-row-box-preview-each-side *ngIf="adultData && adultData.bottom && adultData.bottom.length > 0"
+          [type]="type" [position]="2" [cariesData]="adultData.bottom">
+        </dental-row-box-preview-each-side>
+        <dental-row-box-preview-each-side *ngIf="childrenData && childrenData.bottom && childrenData.bottom.length > 0"
+          [type]="type" [position]="2" [cariesData]="childrenData.bottom">
+        </dental-row-box-preview-each-side>
+      </div>
+    </div>
+  </div>
+  <!-- --- -->
+  <h3>
+    {{type === 'caries' ? 'Dental caries' : type === 'retained' ? 'Retained root' : type === 'boneLoss' ? 'Bone Loss' : 'pulpo periapical lesion'}}
+  </h3>
+</div>

@@ -1,0 +1,13 @@
+<div *ngIf="isLoading" class="loading">
+  <mat-spinner mode="indeterminate"></mat-spinner>
+</div>
+
+<div *ngIf="reportData" class="flex f-column">
+  <dental-showing-teeth></dental-showing-teeth>
+  <!-- --- -->
+  <dental-tooth-details [cariesTypes]="reportData.cariesTypes" [cariesInfoTypes]="reportData.cariesInfoTypes"
+    [retainedRootTypes]="reportData.retainedRootTypes" [pulpLesionTypes]="reportData.pulpLesionTypes"
+    [boneLossTypes]="reportData.boneLossTypes" [boneLossInfoTypes]="reportData.boneLossInfoTypes"
+    [calculusTypes]="reportData.calculusTypes">
+  </dental-tooth-details>
+</div>

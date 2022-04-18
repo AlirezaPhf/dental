@@ -1,0 +1,69 @@
+@import './mixins';
+
+.container {
+  max-width: 1200px;
+  padding: 0 35px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  max-width: 1850px;
+  margin: 0 auto;
+  padding: 0 35px;
+}
+
+.fluidContainer {
+  padding: 0 35px;
+}
+
+.row {
+  @include vertical-top();
+  flex-wrap: wrap;
+  margin-right: -10px;
+  margin-left: -10px;
+
+  .col {
+    @include generateCol(1);
+    flex: 1;
+  }
+
+  .col-1 {
+    @include generateCol(1);
+  }
+
+  .col-1-3 {
+    @include generateCol(1.6);
+  }
+
+  .col-1-5 {
+    @include generateCol(1.5);
+  }
+
+  .col-2 {
+    @include generateCol(2);
+  }
+
+  .col-3 {
+    @include generateCol(3);
+  }
+
+  .col-4 {
+    @include generateCol(4);
+  }
+
+  .col-5 {
+    @include generateCol(5);
+  }
+
+  .col-6 {
+    @include generateCol(6);
+  }
+
+  .col-7 {
+    @include generateCol(7);
+  }
+
+  .col-8 {
+    @include generateCol(8);
+  }
+}

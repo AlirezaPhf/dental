@@ -1,0 +1,24 @@
+.rowReport {
+  margin: 15px 0;
+
+  .boxItem {
+    width: 45px;
+    padding: 8px 0;
+    margin: 0 4px;
+    border: 1px solid #DDD;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+
+    &.active {
+      background: #49CC90 !important;
+      color: #FFF;
+      border-color: transparent;
+    }
+
+    &.hasItems {
+      background: #DDD;
+    }
+  }
+}

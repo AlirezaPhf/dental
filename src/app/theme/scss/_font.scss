@@ -1,0 +1,75 @@
+@font-face {
+  font-family: vazir;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../../../assets/fonts/vazir/Vazir-Regular-FD.woff') format('woff'),
+    url('../../../assets/fonts/vazir/Vazir-Regular-FD.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: vazir;
+  font-style: normal;
+  font-weight: bold;
+  src: url('../../../assets/fonts/vazir/Vazir-Medium-FD.woff') format('woff'),
+    url('../../../assets/fonts/vazir/Vazir-Medium-FD.woff2') format('woff2');
+}
+
+
+@font-face {
+  font-family: vazir;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../../../assets/fonts/vazir/Vazir-Bold-FD.woff') format('woff'),
+    url('../../../assets/fonts/vazir/Vazir-Bold-FD.woff2') format('woff2');
+}
+
+html,
+body {
+  font-family: vazir, serif !important;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+option,
+mat-card-title,
+mat-error,
+mat-hint,
+label,
+mat-radio-button,
+mat-button-toggle,
+mat-toolbar,
+button,
+.mat-raised-button,
+.mat-option,
+.mat-paginator-range-label,
+.mat-paginator-page-size-label,
+.mat-calendar-table-header *,
+.mat-calendar-body *,
+.customSnackBar,
+.mat-snackbar-container,
+.mat-simple-snackbar,
+.mat-snack-bar-container.mat-snack-bar-center,
+.mat-header-cell,
+.mat-cell,
+.mat-form-field,
+.mat-list-item,
+.mat-menu-item,
+.mat-tooltip,
+.mat-tab-group,
+.mat-select,
+.mat-button,
+.mat-expansion-panel-content,
+.mat-expansion-panel-header,
+.mat-slide-toggle-content,
+.mat-tab-label,
+mat-label,
+.mat-tab-link {
+  font-family: vazir, serif !important;
+}
